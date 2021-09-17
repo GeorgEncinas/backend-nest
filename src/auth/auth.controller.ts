@@ -9,7 +9,7 @@ export class AuthController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  create(@Body() createAuthDto: LoginDto) {
+  validateLogin(@Body() createAuthDto: LoginDto) {
     return this.authService.validateLogin(createAuthDto);
   }
 }

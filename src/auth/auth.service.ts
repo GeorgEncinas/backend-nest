@@ -1,15 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
+import { UserRepository } from './../user/repositories/user.repository';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Injectable()
 export class AuthService {
+
+  constructor(private userRepository: UserRepository) { }
+
   validateLogin(login: LoginDto) {
-    return {
-      description: 'Correct login',
-      payload: login,
-    };
+    return this.userRepository.findByEmail(login.email);
   }
 
   findAll() {
